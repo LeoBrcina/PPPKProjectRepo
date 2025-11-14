@@ -4,6 +4,7 @@ This repository contains a complete PPPK course project that combines:
 
 - An **ASP.NET Core MVC web application** for managing patients, medical records, appointments, prescriptions, medicines, diseases and attachments (PostgreSQL + Entity Framework Core).
 - A set of **Python ETL & analysis scripts** for working with **TCGA / genomics data**, using **Selenium**, **MinIO**, **MongoDB**, and plotting tools.
+- A **database folder** with the full ER diagram and SQL DDL script used for the PostgreSQL schema.
 
 > ⚠️ All real credentials (PostgreSQL, MongoDB, MinIO) have been cleared from the repo.  
 > You must provide your own connection strings and access keys before running anything.
@@ -70,15 +71,20 @@ This repository contains a complete PPPK course project that combines:
     │       ├── appsettings.json
     │       ├── appsettings.Development.json
     │       └── Program.cs
-    └── PPPK2ndPart/
-        └── scripts/
-            ├── VerifyScripts/
-            │   ├── geneverify.py
-            │   └── insertclinicaldata.py
-            ├── miniotomongo.py
-            ├── minioupload.py
-            ├── scraper.py
-            └── visualisation.py
+    ├── PPPK2ndPart/
+    │   └── scripts/
+    │       ├── VerifyScripts/
+    │       │   ├── geneverify.py
+    │       │   └── insertclinicaldata.py
+    │       ├── miniotomongo.py
+    │       ├── minioupload.py
+    │       ├── scraper.py
+    │       └── visualisation.py
+    └── Database/              # new helper folder
+        ├── PPPKDatabaseERDiagram.drawio       # ER diagram for the medical records DB
+        └── DBeaverDatabaseScript.sql          # full SQL DDL script (generated from DBeaver)
+
+*(If the folder name differs in your repo, adjust the path above accordingly.)*
 
 ---
 
@@ -104,6 +110,8 @@ This repository contains a complete PPPK course project that combines:
 
 - MongoDB (for TCGA-like gene expression & clinical data)  
 - MinIO object storage (datasets)  
+- Draw.io / diagrams.net (ER diagram: `PPPKDatabaseERDiagram.drawio`)  
+- DBeaver (exported SQL script: `DBeaverDatabaseScript.sql`)  
 
 ---
 
@@ -358,7 +366,17 @@ Each entity has:
 - A controller for CRUD operations  
 - Razor views in the corresponding folder under `WebApp/Views`  
 
-Together they form a simple medical records management system with standard ASP.NET MVC patterns.
+### Database ER Diagram & SQL Script
+
+For documentation and easier setup, the repo includes:
+
+- **`Database/PPPKDatabaseERDiagram.drawio`** – the ER diagram of the medical records database, editable with [draw.io / diagrams.net](https://www.diagrams.net).  
+- **`Database/DBeaverDatabaseScript.sql`** – the full DDL script exported from DBeaver (tables, keys, constraints, etc.) which can be executed on a PostgreSQL instance to create the schema.
+
+This makes it easy to:
+
+- Inspect the data model visually.  
+- Recreate the database schema from scratch without relying only on EF migrations.
 
 ---
 
