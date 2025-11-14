@@ -1,0 +1,36 @@
+﻿@model WebApp.ViewModels.MedicalRecordVM
+
+@{
+    ViewData["Title"] = "Medical Record Details";
+}
+
+<h1>Medical Record Details</h1>
+
+<div class="form-group">
+    <label>Record ID:</label>
+    <p>@Model.RecordId</p>
+</div>
+
+<div class="form-group">
+    <label>Patient Name:</label>
+    <p>@Model.Patient.FirstName @Model.Patient.LastName</p>
+</div>
+
+<div class="form-group">
+    <label>Disease(s):</label>
+    <p>@string.Join(", ", Model.DiseaseNames)</p>
+</div>
+
+<div class="form-group">
+    <label>Start Date:</label>
+    <p>@Model.StartDate.ToString("yyyy-MM-dd")</p>
+</div>
+
+<div class="form-group">
+    <label>End Date:</label>
+    <p>@(Model.EndDate.HasValue ? Model.EndDate.Value.ToString("yyyy-MM-dd") : "Ongoing")</p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+<a asp-action="Edit" asp-route-id="@Model.RecordId" class="btn btn-warning">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.RecordId" class="btn btn-danger">Delete</a>

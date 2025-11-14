@@ -1,0 +1,32 @@
+﻿@model WebApp.ViewModels.PrescriptionVM
+
+@{
+    ViewData["Title"] = "Delete Prescription";
+}
+
+<h1>Delete Prescription</h1>
+
+<div class="alert alert-danger">
+    Are you sure you want to delete this prescription?
+</div>
+
+<div class="form-group">
+    <label>Prescription ID:</label>
+    <p>@Model.PrescriptionId</p>
+</div>
+
+<div class="form-group">
+    <label>Patient ID:</label>
+    <p>@Model.PatientId</p>
+</div>
+
+<div class="form-group">
+    <label>Medicine(s):</label>
+    <p>@string.Join(", ", Model.MedicineNames)</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="PrescriptionId" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,0 +1,40 @@
+﻿@model WebApp.ViewModels.MedicalRecordVM
+
+@{
+    ViewData["Title"] = "Edit Medical Record";
+}
+
+<h1>Edit Medical Record</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="RecordId" />
+
+    <div class="form-group">
+        <label asp-for="PatientId" class="control-label"></label>
+        <select asp-for="PatientId" class="form-control" asp-items="ViewBag.Patients" disabled>
+        </select>
+        <span asp-validation-for="PatientId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DiseaseIds" class="control-label"></label>
+        <select asp-for="DiseaseIds" class="form-control" asp-items="ViewBag.Diseases" multiple>
+        </select>
+        <span asp-validation-for="DiseaseIds" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StartDate" class="control-label"></label>
+        <input asp-for="StartDate" class="form-control" type="date" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndDate" class="control-label"></label>
+        <input asp-for="EndDate" class="form-control" type="date" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

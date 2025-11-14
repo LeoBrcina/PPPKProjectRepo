@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebApp.ViewModels.PatientVM>
+
+@{
+    ViewData["Title"] = "Patients List";
+}
+
+<h2>Patients</h2>
+
+<form method="get" action="@Url.Action("Index", "Patient")" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="searchTerm" class="form-control" placeholder="Search by Name or OIB" value="@ViewBag.SearchTerm" required />
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a href="@Url.Action("Index", "Patient")" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>OIB</th>
+            <th>Date of Birth</th>
+            <th>Gender</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            foreach (var patient in Model)
+            {
+                <tr>
+                    <td>@patient.FirstName</td>
+                    <td>@patient.LastName</td>
+                    <td>@patient.Oib</td>
+                    <td>@patient.DateOfBirth.ToShortDateString()</td>
+                    <td>
+                        @if (patient.Gender == "M")
+                        {
+                            <span>Male</span>
+                        }
+                        else if (patient.Gender == "F")
+                        {
+                            <span>Female</span>
+                        }
+                        else
+                        {
+                            <span>Other</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@patient.PatientId" class="btn btn-info btn-sm">Details</a>
+                        <a asp-action="Edit" asp-route-id="@patient.PatientId" class="btn btn-warning btn-sm">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@patient.PatientId" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No patients found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="d-flex gap-2">
+    <a asp-action="Create" class="btn btn-primary">Add New Patient</a>
+    <a asp-action="ExportToCsv" asp-controller="Patient" class="btn" style="background-color: #006400; color: white;">Export All Patients to CSV</a>
+</div>

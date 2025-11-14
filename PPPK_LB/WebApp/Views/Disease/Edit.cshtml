@@ -1,0 +1,22 @@
+﻿@model WebApp.ViewModels.DiseaseVM
+
+@{
+    ViewData["Title"] = "Edit Disease";
+}
+
+<h2>Edit Disease</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="DiseaseId" />
+
+    <div class="form-group">
+        <label asp-for="DiseaseName" class="control-label"></label>
+        <input asp-for="DiseaseName" class="form-control" />
+        <span asp-validation-for="DiseaseName" class="text-danger"></span>
+    </div>
+
+    <br>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

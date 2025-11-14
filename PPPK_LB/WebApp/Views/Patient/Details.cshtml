@@ -1,0 +1,116 @@
+﻿@model WebApp.ViewModels.PatientVM
+
+@{
+    ViewData["Title"] = "Patient Details";
+}
+
+<h2>Patient Details</h2>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.FirstName @Model.LastName</h5>
+        <p class="card-text"><strong>OIB:</strong> @Model.Oib</p>
+        <p class="card-text"><strong>Date of Birth:</strong> @Model.DateOfBirth.ToShortDateString()</p>
+        <p class="card-text">
+            <strong>Gender:</strong>
+            @if (Model.Gender == "M")
+            {
+                <span>Male</span>
+            }
+            else if (Model.Gender == "F")
+            {
+                <span>Female</span>
+            }
+            else
+            {
+                <span>Other</span>
+            }
+        </p>
+    </div>
+</div>
+
+<hr />
+
+<h3>Appointments</h3>
+@if (Model.Appointments.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Appointment Date</th>
+                <th>Appointment Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var appointment in Model.Appointments)
+            {
+                <tr>
+                    <td>@appointment.AppointmentDate.ToString("g")</td>
+                    <td>@appointment.AppointmentTypeName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>This patient has no appointments.</p>
+}
+
+<hr />
+
+<h3>Prescriptions</h3>
+@if (Model.Prescriptions.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Medicine Names</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var prescription in Model.Prescriptions)
+            {
+                <tr>
+                    <td>@string.Join(", ", prescription.MedicineNames)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>This patient has no prescriptions.</p>
+}
+
+<hr />
+
+<h3>Medical Records</h3>
+@if (Model.MedicalRecords.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Disease Names</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var record in Model.MedicalRecords)
+            {
+                <tr>
+                    <td>@string.Join(", ", record.DiseaseNames)</td>
+                    <td>@record.StartDate.ToShortDateString()</td>
+                    <td>@(record.EndDate.HasValue ? record.EndDate.Value.ToShortDateString() : "Ongoing")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>This patient has no medical records.</p>
+}
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

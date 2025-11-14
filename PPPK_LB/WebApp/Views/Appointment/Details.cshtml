@@ -1,0 +1,29 @@
+﻿@model WebApp.ViewModels.AppointmentVM
+
+@{
+    ViewData["Title"] = "Appointment Details";
+}
+
+<h1>Appointment Details</h1>
+
+<div class="form-group">
+    <label>Appointment ID:</label>
+    <p>@Model.AppointmentId</p>
+</div>
+
+<div class="form-group">
+    <label>Appointment Date:</label>
+    <p>@Model.AppointmentDate.ToString("yyyy-MM-dd HH:mm")</p>
+</div>
+
+<div class="form-group">
+    <label>Patient Name:</label>
+    <p>@Model.PatientName</p>
+</div>
+
+<div class="form-group">
+    <label>Appointment Type:</label>
+    <p>@Model.AppointmentTypeName</p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

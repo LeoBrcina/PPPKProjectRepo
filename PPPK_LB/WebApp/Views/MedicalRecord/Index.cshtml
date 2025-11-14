@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebApp.ViewModels.MedicalRecordVM>
+
+@{
+    ViewData["Title"] = "Medical Records";
+}
+
+<h1>Medical Records</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Add New Medical Record</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Record ID</th>
+            <th>Patient Name</th>
+            <th>Disease(s)</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var record in Model)
+        {
+            <tr>
+                <td>@record.RecordId</td>
+                <td>@record.Patient.FirstName @record.Patient.LastName</td>
+                <td>@string.Join(", ", record.DiseaseNames)</td>
+                <td>@record.StartDate.ToString("yyyy-MM-dd")</td>
+                <td>@(record.EndDate.HasValue ? record.EndDate.Value.ToString("yyyy-MM-dd") : "Ongoing")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@record.RecordId" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@record.RecordId" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@record.RecordId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

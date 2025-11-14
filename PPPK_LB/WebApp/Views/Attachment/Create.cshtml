@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Upload Attachments";
+}
+
+<h1>Upload Attachments</h1>
+
+<form method="post" enctype="multipart/form-data" asp-action="Create" asp-controller="Attachment">
+    <div class="form-group">
+        <label for="Appointment">Select Appointment:</label>
+        <select id="Appointment" name="appointmentId" class="form-control" required>
+            <option value="">-- Select Appointment --</option>
+            @foreach (var item in ViewBag.Appointments as List<SelectListItem>)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="Files">Select Files:</label>
+        <input type="file" id="Files" name="files" multiple class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>

@@ -1,0 +1,35 @@
+﻿@model List<WebApp.ViewModels.DiseaseVM>
+
+@{
+    ViewData["Title"] = "Diseases";
+}
+
+<h2>Diseases</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New Disease</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Disease ID</th>
+            <th>Disease Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var disease in Model)
+        {
+            <tr>
+                <td>@disease.DiseaseId</td>
+                <td>@disease.DiseaseName</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@disease.DiseaseId" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@disease.DiseaseId" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@disease.DiseaseId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<WebApp.ViewModels.PrescriptionVM>
+
+@{
+    ViewData["Title"] = "Prescriptions";
+}
+
+<h1>Prescriptions</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Create New Prescription</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Prescription ID</th>
+            <th>Medicines</th>
+            <th>Patient</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prescription in Model)
+        {
+            <tr>
+                <td>@prescription.PrescriptionId</td>
+                <td>@string.Join(", ", prescription.MedicineNames)</td>
+                <td>@prescription.PatientName</td> 
+                <td>
+                    <a asp-action="Details" asp-route-id="@prescription.PrescriptionId" class="btn btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@prescription.PrescriptionId" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@prescription.PrescriptionId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

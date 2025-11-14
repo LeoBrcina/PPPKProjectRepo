@@ -1,0 +1,26 @@
+﻿@model WebApp.ViewModels.PrescriptionVM
+
+@{
+    ViewData["Title"] = "Prescription Details";
+}
+
+<h1>Prescription Details</h1>
+
+<div class="form-group">
+    <label>Prescription ID:</label>
+    <p>@Model.PrescriptionId</p>
+</div>
+
+<div class="form-group">
+    <label>Patient ID:</label>
+    <p>@Model.PatientId</p>
+</div>
+
+<div class="form-group">
+    <label>Medicine(s):</label>
+    <p>@string.Join(", ", Model.MedicineNames)</p>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+<a asp-action="Edit" asp-route-id="@Model.PrescriptionId" class="btn btn-warning">Edit</a>
+<a asp-action="Delete" asp-route-id="@Model.PrescriptionId" class="btn btn-danger">Delete</a>

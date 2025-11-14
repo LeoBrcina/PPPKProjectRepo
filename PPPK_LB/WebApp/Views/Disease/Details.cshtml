@@ -1,0 +1,15 @@
+﻿@model WebApp.ViewModels.DiseaseVM
+
+@{
+    ViewData["Title"] = "Disease Details";
+}
+
+<h2>Disease Details</h2>
+
+<div>
+    <h4>Disease ID: <strong>@Model.DiseaseId</strong></h4>
+    <h4>Disease Name: <strong>@Model.DiseaseName</strong></h4>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>
+<a asp-action="Edit" asp-route-id="@Model.DiseaseId" class="btn btn-primary">Edit</a>
